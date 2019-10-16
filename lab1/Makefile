@@ -4,7 +4,5 @@ NAME	= lab1
 
 all: $(NAME)
 
-$(NAME): $(OBJ) $(HEADER)
-	g++ -o $(NAME) $(SRC)
-
-re: fclean all
+$(NAME): $(SRC) $(HEADER)
+	g++ -o $(NAME) $(SRC) -I./

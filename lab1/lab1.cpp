@@ -18,6 +18,8 @@ void	print_node(t_node *head)
 		cout << tmp->id;
 		if (tmp->next)
 			cout << "->";
+		else
+			cout << "\n";
 		tmp = tmp->next;
     }
 }
@@ -60,7 +62,7 @@ t_node  *creatennode(void)
 	std::string	date;
 	unsigned	code;
 
-	std::cout << "Skolko elementov sozdat: ";
+	std::cout << "Сколько элементов нужно создать: ";
 	std::cin >> n;
 	i = 0;
 	while (++i <= n)
@@ -68,12 +70,12 @@ t_node  *creatennode(void)
 		if (!head)
 		{
 			head = node_init();
-			std::cout << "Dlya " << i << " elementa:\n";
-			std::cout << "\tVvedite id: ";
+			std::cout << "Для " << i << " элемента:\n";
+			std::cout << "\tВведите номер Мед.Книжки: ";
 			std::cin >> id;
-			std::cout << "\tVvedite datu: ";
+			std::cout << "\tВведите дату: ";
 			std::cin >> date;
-			std::cout << "\tVvedite kod diagnoza: ";
+			std::cout << "\tВведите код диагноза: ";
 			std::cin >> code;
 			head->id = id;
 			head->date = date;
@@ -82,7 +84,7 @@ t_node  *creatennode(void)
 		}
 		else
 		{
-			std::cout << "dlya " << i << " elementa:\n";
+			std::cout << "для " << i << " элемента:\n";
 			std::cout << "\tVvedite id: ";
 			std::cin >> id;
 			std::cout << "\tVvedite datu: ";
@@ -131,9 +133,7 @@ int	main(void)
 				print_node(head);
 				break;
 			case 3:
-				cout << "Введите номер Мед.Книжки (или просто введите '0'): ";
-				cin >> param;
-				push_node(head, param);
+				push_node(head);
 				break;
 			case 4:
 				break;
@@ -142,6 +142,7 @@ int	main(void)
 			case 6:
 				break;
 			case 0:
+				exit (1);
 				break;
 		}
 	}
