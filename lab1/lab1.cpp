@@ -8,19 +8,23 @@ using namespace std;
 
 void	print_node(t_node *head)
 {
-	t_node	*tmp;
+	t_node		*tmp;
+	unsigned	i;
 
+	i = 0;
 	tmp = head;
 	if (!tmp)
 		std::cout << "Вы не зполнили список" << endl;
 	while (tmp)
 	{
-		cout << tmp->id;
-		if (tmp->next)
-			cout << "->";
-		else
+		cout << "Запись №" << i << ": " << endl;
+		cout << "\tНомер Мед.Книжки: " << tmp->id << endl;
+		cout << "\tДата обращения: " << tmp->date << endl;
+		cout << "\tКод диагноза: " << tmp->code << endl;
+		if (!tmp->next)
 			cout << "\n";
 		tmp = tmp->next;
+		i++;
     }
 }
 
@@ -84,12 +88,12 @@ t_node  *creatennode(void)
 		}
 		else
 		{
-			std::cout << "для " << i << " элемента:\n";
-			std::cout << "\tVvedite id: ";
+			std::cout << "Для " << i << " элемента:\n";
+			std::cout << "\tВведите номер Мед.Книжки: ";
 			std::cin >> id;
-			std::cout << "\tVvedite datu: ";
+			std::cout << "\tВведите дату: ";
 			std::cin >> date;
-			std::cout << "\tVvedite kod diagnoza: ";
+			std::cout << "\tВведите код диагноза: ";
 			std::cin >> code;
 			tmp->next = add_new(id, date, code);
 			tmp = tmp->next;
@@ -136,10 +140,13 @@ int	main(void)
 				push_node(head);
 				break;
 			case 4:
+				delete_by_code(head);
 				break;
 			case 5:
+				print_node(move_to_new(head));
 				break;
 			case 6:
+				count_codes(head);
 				break;
 			case 0:
 				exit (1);
