@@ -14,7 +14,7 @@ void	print_node(t_node *head)
 	i = 0;
 	tmp = head;
 	if (!tmp)
-		std::cout << "Вы не зполнили список" << endl;
+		std::cout << "Вы не заполнили список" << endl;
 	while (tmp)
 	{
 		cout << "Запись №" << i << ": " << endl;
