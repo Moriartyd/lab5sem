@@ -7,7 +7,6 @@
 int	main(void)
 {
 	Tnode		node;
-	unsigned	param;
 	string		str;
 	int c;
 	int	f_m;

@@ -79,32 +79,20 @@ void	Tnode::push_node()
 {
 	unsigned	id;
 	Tnode *res;
-	Tnode* tmp;
+	Tnode* node;
 
 	std::cout << "Введите номер Мед.Карты: ";
 	std::cin >> id;
 	res = add_new(id, "\0", 0);
-	if (id)
-	{
-		res->set_next(this);
-		std::cout << "\tВведите дату обращения: ";
-		std::cin >> res->date;
-		std::cout << "\tВведите код диагноза: ";
-		std::cin >> res->code;
-		move_data(res);
-	}
-	else
-	{
-		tmp = this;
-		while (tmp->get_next())
-			tmp = tmp->get_next();
-		tmp->next = res;
-		std::cout << "\tВведите дату обращения: ";
-		std::cin >> res->date;
-		std::cout << "\tВведите код диагноза: ";
-		std::cin >> res->code;
-		res->next = NULL;
-	}
+	node = this;
+	while (node->get_next() && node->get_next()->id != id)
+		node = node->get_next();
+	res->set_next(node->get_next());
+	node->set_next(res);
+	std::cout << "\tВведите дату обращения: ";
+	std::cin >> res->date;
+	std::cout << "\tВведите код диагноза: ";
+	std::cin >> res->code;
 }
 
 void	Tnode::delete_by_code()
@@ -146,45 +134,28 @@ Tnode* Tnode::move_to_new()
 {
 	Tnode* node;
 	Tnode* res;
-	Tnode* tmp;
-	Tnode* res_head;
-	Tnode* res_tmp;
-	Tnode* tmpn;
+	Tnode* prev;
+	Tnode* next;
 	unsigned	code;
 
 	std::cout << "\nВведите номер Мед.Карты: ";
 	std::cin >> code;
 	node = this;
-	tmp = 0;
 	res = 0;
-	res_head = 0;
-	tmpn = 0;
-	res_tmp = 0;
-	while (node)
+	while (node && node->get_id() != code)
 	{
-		if (node->id == code)
-		{
-			if (tmp)
-				tmp->set_next(node->get_next());
-			res = node;
-			tmpn = res->get_next();
-			res->next = 0;
-			if (!res_head)
-			{
-				res_head = res;
-				res_tmp = res_head;
-			}
-			else
-			{
-				while (res_tmp->next)
-					res_tmp = res_tmp->get_next();
-				res_tmp->set_next(res);
-			}
-		}
-		tmp = node;
-		node = node->id == code ? tmpn : node->get_next();
+		prev = node;
+		node = node->get_next();
 	}
-	return (res_head);
+	res = node;
+	while (node && node->get_id() == code)
+		node = node->get_next();
+	prev->set_next(node);
+	node = res;
+	while (node && node->get_next() != prev->get_next())
+		node = node->get_next();
+	node->set_next(0);
+	return (res);
 }
 
 void	 Tnode::count_codes()
