@@ -3,34 +3,22 @@
 t_node	*push_node(t_node* head)
 {
 	t_node* res;
-	t_node* tmp;
+	t_node* node;
 	unsigned	id;
 
 	std::cout << "Введите номер Мед.Карты: ";
 	std::cin >> id;
 	res = new t_node;
 	res->id = id;
-	if (id)
-	{
-		res->next = head;
-		std::cout << "\tВведите дату обращения: ";
-		std::cin >> res->date;
-		std::cout << "\tВведите код диагноза: ";
-		std::cin >> res->code;
-		head = res;
-	}
-	else
-	{
-		tmp = head;
-		while (tmp->next)
-			tmp = tmp->next;
-		std::cout << "\tВведите дату обращения: ";
-		std::cin >> res->date;
-		std::cout << "\tВведите код диагноза: ";
-		std::cin >> res->code;
-		tmp->next = res;
-		res->next = NULL;
-	}
+	node = head;
+	while (node->next && node->next->id != id)
+		node = node->next;
+	res->next = node->next;
+	node->next = res;
+	std::cout << "\tВведите дату обращения: ";
+	std::cin >> res->date;
+	std::cout << "\tВведите код диагноза: ";
+	std::cin >> res->code;
 	return (head);
 }
 
@@ -72,45 +60,28 @@ t_node* move_to_new(t_node* head)
 {
 	t_node* node;
 	t_node* res;
-	t_node* tmp;
-	t_node* res_head;
-	t_node* res_tmp;
-	t_node* tmpn;
+	t_node* prev;
+	t_node* next;
 	unsigned	code;
 
 	std::cout << "\nВведите номер Мед.Карты: ";
 	std::cin >> code;
 	node = head;
-	tmp = 0;
 	res = 0;
-	res_head = 0;
-	tmpn = 0;
-	res_tmp = 0;
-	while (node)
+	while (node && node->id != code)
 	{
-		if (node->id == code)
-		{
-			if (tmp)
-				tmp->next = node->next;
-			res = node;
-			tmpn = res->next;
-			res->next = 0;
-			if (!res_head)
-			{
-				res_head = res;
-				res_tmp = res_head;
-			}
-			else
-			{
-				while (res_tmp->next)
-					res_tmp = res_tmp->next;
-				res_tmp->next = res;
-			}
-		}
-		tmp = node;
-		node = node->id == code ? tmpn : node->next;
+		prev = node;
+		node = node->next;
 	}
-	return (res_head);
+	res = node;
+	while (node && node->id == code)
+		node = node->next;
+	prev->next = node;
+	node = res;
+	while (node && node->next != prev->next)
+		node = node->next;
+	node->next = 0;
+	return (res);
 }
 
 void	 count_codes(t_node* head)
