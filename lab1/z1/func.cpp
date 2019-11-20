@@ -1,5 +1,4 @@
-#pragma once
-#include "lab1.h"
+#include "Lab1.h"
 
 t_node	*push_node(t_node* head)
 {
@@ -7,16 +6,16 @@ t_node	*push_node(t_node* head)
 	t_node* tmp;
 	unsigned	id;
 
-	std::cout << "Ââåäèòå íîìåð Ìåä.Êíèæêè (èëè ïðîñòî ââåäèòå '0'): ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ°Ñ€Ñ‚Ñ‹: ";
 	std::cin >> id;
 	res = new t_node;
 	res->id = id;
 	if (id)
 	{
 		res->next = head;
-		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: ";
 		std::cin >> res->date;
-		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 		std::cin >> res->code;
 		head = res;
 	}
@@ -25,9 +24,9 @@ t_node	*push_node(t_node* head)
 		tmp = head;
 		while (tmp->next)
 			tmp = tmp->next;
-		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: ";
 		std::cin >> res->date;
-		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 		std::cin >> res->code;
 		tmp->next = res;
 		res->next = NULL;
@@ -41,7 +40,7 @@ void	delete_by_code(t_node* head)
 	t_node* prev;
 	unsigned	code;
 
-	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: "; std::cin >> code;
 	cur = head;
 	prev = NULL;
 	while (cur)
@@ -79,7 +78,7 @@ t_node* move_to_new(t_node* head)
 	t_node* tmpn;
 	unsigned	code;
 
-	std::cout << "\nÂâåäèòå Íîìåð ìåä êàðòû: ";
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ°Ñ€Ñ‚Ñ‹: ";
 	std::cin >> code;
 	node = head;
 	tmp = 0;
@@ -122,8 +121,8 @@ void	 count_codes(t_node* head)
 	std::string	data;
 
 	counter = 0;
-	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
-	std::cout << "Ââåäèòå äàòó: "; std::cin >> data;
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: "; std::cin >> code;
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: "; std::cin >> data;
 	tmp = head;
 	while (tmp)
 	{
@@ -131,5 +130,5 @@ void	 count_codes(t_node* head)
 			counter++;
 		tmp = tmp->next;
 	}
-	std::cout << "Êîëè÷åñòâî îáðàùåíèé: " << counter << std::endl;
+	std::cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ð¹: " << counter << std::endl;
 }

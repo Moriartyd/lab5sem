@@ -1,5 +1,4 @@
-﻿#pragma once
-#include "Lab1.h"
+﻿#include "Lab1.h"
 #include <iostream>
 #include <string>
 
@@ -112,7 +111,6 @@ int	main(void)
 	int c;
 	int	f_m;
 
-	setlocale(LC_ALL, "RUS");
 	c = 1;
 	f_m = 1;
 	head = NULL;

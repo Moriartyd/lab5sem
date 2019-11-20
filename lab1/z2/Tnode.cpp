@@ -81,15 +81,15 @@ void	Tnode::push_node()
 	Tnode *res;
 	Tnode* tmp;
 
-	std::cout << "Ââåäèòå íîìåð Ìåä.Êíèæêè (èëè ïðîñòî ââåäèòå '0'): ";
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ°Ñ€Ñ‚Ñ‹: ";
 	std::cin >> id;
 	res = add_new(id, "\0", 0);
 	if (id)
 	{
 		res->set_next(this);
-		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: ";
 		std::cin >> res->date;
-		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 		std::cin >> res->code;
 		move_data(res);
 	}
@@ -99,9 +99,9 @@ void	Tnode::push_node()
 		while (tmp->get_next())
 			tmp = tmp->get_next();
 		tmp->next = res;
-		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: ";
 		std::cin >> res->date;
-		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 		std::cin >> res->code;
 		res->next = NULL;
 	}
@@ -113,7 +113,7 @@ void	Tnode::delete_by_code()
 	Tnode* prev;
 	unsigned	code;
 
-	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: "; std::cin >> code;
 	cur = this;
 	prev = NULL;
 	while (cur)
@@ -152,7 +152,7 @@ Tnode* Tnode::move_to_new()
 	Tnode* tmpn;
 	unsigned	code;
 
-	std::cout << "\nÂâåäèòå Íîìåð ìåä êàðòû: ";
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ°Ñ€Ñ‚Ñ‹: ";
 	std::cin >> code;
 	node = this;
 	tmp = 0;
@@ -195,8 +195,8 @@ void	 Tnode::count_codes()
 	std::string	data;
 
 	counter = 0;
-	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
-	std::cout << "Ââåäèòå äàòó: "; std::cin >> data;
+	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: "; std::cin >> code;
+	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: "; std::cin >> data;
 	tmp = this;
 	while (tmp)
 	{
@@ -204,7 +204,7 @@ void	 Tnode::count_codes()
 			counter++;
 		tmp = tmp->next;
 	}
-	std::cout << "Êîëè÷åñòâî îáðàùåíèé: " << counter << std::endl;
+	std::cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ð¹: " << counter << std::endl;
 }
 
 void	Tnode::print_node()
@@ -215,13 +215,13 @@ void	Tnode::print_node()
 	i = 0;
 	tmp = this;
 	if (!tmp)
-		std::cout << "Âû íå çàïîëíèëè ñïèñîê" << endl;
+		std::cout << "Ð¡Ð¿Ð¸ÑÐ¾Ðº Ð¿ÑƒÑÑ‚" << endl;
 	while (tmp)
 	{
-		cout << "Çàïèñü ¹" << i << ": " << endl;
-		cout << "\tÍîìåð Ìåä.Êíèæêè: " << tmp->id << endl;
-		cout << "\tÄàòà îáðàùåíèÿ: " << tmp->date << endl;
-		cout << "\tÊîä äèàãíîçà: " << tmp->code << endl;
+		cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ â„–" << i << ": " << endl;
+		cout << "\tÐÐ¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ°Ñ€Ñ‚Ñ‹: " << tmp->id << endl;
+		cout << "\tÐ”Ð°Ñ‚Ð° Ð¾Ð±Ñ€Ð°Ñ‰Ñ‰ÐµÐ½Ð¸Ñ: " << tmp->date << endl;
+		cout << "\tÐšÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: " << tmp->code << endl;
 		if (!tmp->next)
 			cout << "\n";
 		tmp = tmp->get_next();
@@ -247,7 +247,7 @@ void	Tnode::createnode(void)
 	std::string	date;
 	unsigned	code;
 
-	std::cout << "Ñêîëüêî ýëåìåíòîâ íóæíî ñîçäàòü: ";
+	std::cout << "Ð¡ÐºÐ¾Ð»ÑŒÐºÐ¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð½ÑƒÐ¶Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ: ";
 	std::cin >> n;
 	i = 0;
 	tmp = this;
@@ -255,12 +255,12 @@ void	Tnode::createnode(void)
 	{
 		if (i == 1)
 		{
-			std::cout << "Äëÿ " << i << " ýëåìåíòà:\n";
-			std::cout << "\tÂâåäèòå íîìåð Ìåä.Êíèæêè: ";
+			std::cout << "Ð”Ð»Ñ " << i << " ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:\n";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ½Ð¸Ð¶ÐºÐ¸: ";
 			std::cin >> id;
-			std::cout << "\tÂâåäèòå äàòó: ";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ: ";
 			std::cin >> date;
-			std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 			std::cin >> code;
 			this->id = id;
 			this->date = date;
@@ -269,12 +269,12 @@ void	Tnode::createnode(void)
 		}
 		else
 		{
-			std::cout << "Äëÿ " << i << " ýëåìåíòà:\n";
-			std::cout << "\tÂâåäèòå íîìåð Ìåä.Êíèæêè: ";
+			std::cout << "Ð”Ð»Ñ " << i << " ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:\n";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ½Ð¸Ð¶ÐºÐ¸: ";
 			std::cin >> id;
-			std::cout << "\tÂâåäèòå äàòó: ";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ: ";
 			std::cin >> date;
-			std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð´Ð¸Ð°Ð³Ð½Ð¾Ð·Ð°: ";
 			std::cin >> code;
 			tmp->set_next(add_new(id, date, code));
 			tmp = tmp->get_next();

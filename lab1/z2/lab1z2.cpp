@@ -11,7 +11,6 @@ int	main(void)
 	string		str;
 	int c;
 	int	f_m;
-	setlocale(LC_ALL, "RUS");
 	c = 1;
 	f_m = 1;
 	// node = new Tnode(0, 0, 0, 0);
