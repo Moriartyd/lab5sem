@@ -1,5 +1,4 @@
-#ifndef LAB1_H
-# define LAB1_H
+#pragma once
 
 #include <stdlib.h>
 #include <iostream>
@@ -7,15 +6,13 @@
 
 typedef struct		s_node
 {
-	unsigned		id;		//	РќРѕРјРµСЂ РјРµРґ РєР°СЂС‚С‹
-	std::string		date;	//	Р”Р°С‚Р° РѕР±СЂР°С‰РµРЅРёСЏ
-	unsigned		code;	//	РљРѕРґ РґРёР°РіРЅРѕР·Р°
+	unsigned		id;		//	Номер мед карты
+	std::string		date;	//	Дата обращения
+	unsigned		code;	//	Код диагноза
 	struct s_node	*next;
 }					t_node;
 
-void				push_node(t_node *head);
-void				delete_by_code(t_node *head);
-t_node				*move_to_new(t_node *head);
-void				count_codes(t_node *head);
-
-#endif
+t_node				*push_node(t_node* head);
+void				delete_by_code(t_node* head);
+t_node*				move_to_new(t_node* head);
+void				count_codes(t_node* head);

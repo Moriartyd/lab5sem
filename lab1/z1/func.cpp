@@ -1,18 +1,23 @@
+#pragma once
 #include "lab1.h"
 
-void	push_node(t_node *head)
+t_node	*push_node(t_node* head)
 {
-	t_node		*res;
-	t_node		*tmp;
+	t_node* res;
+	t_node* tmp;
 	unsigned	id;
 
-	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð½Ð¾Ð¼ÐµÑ€ ÐœÐµÐ´.ÐšÐ½Ð¸Ð¶ÐºÐ¸ (Ð¸Ð»Ð¸ Ð¿Ñ€Ð¾ÑÑ‚Ð¾ Ð²Ð²ÐµÐ´Ð¸Ñ‚Ðµ '0'): ";
+	std::cout << "Ââåäèòå íîìåð Ìåä.Êíèæêè (èëè ïðîñòî ââåäèòå '0'): ";
 	std::cin >> id;
 	res = new t_node;
 	res->id = id;
 	if (id)
 	{
 		res->next = head;
+		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cin >> res->date;
+		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cin >> res->code;
 		head = res;
 	}
 	else
@@ -20,18 +25,23 @@ void	push_node(t_node *head)
 		tmp = head;
 		while (tmp->next)
 			tmp = tmp->next;
+		std::cout << "\tÂâåäèòå äàòó: ";
+		std::cin >> res->date;
+		std::cout << "\tÂâåäèòå êîä äèàãíîçà: ";
+		std::cin >> res->code;
 		tmp->next = res;
 		res->next = NULL;
 	}
+	return (head);
 }
 
-void	delete_by_code(t_node *head)
+void	delete_by_code(t_node* head)
 {
-	t_node		*cur;
-	t_node		*prev;
+	t_node* cur;
+	t_node* prev;
 	unsigned	code;
 
-	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: "; std::cin >> code;
+	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
 	cur = head;
 	prev = NULL;
 	while (cur)
@@ -59,58 +69,61 @@ void	delete_by_code(t_node *head)
 	}
 }
 
-t_node	*move_to_new(t_node *head)
+t_node* move_to_new(t_node* head)
 {
-	t_node		*node;
-    t_node		*res;
-    t_node		*tmp;
-    t_node		*res_head;
-    t_node		*res_tmp;
+	t_node* node;
+	t_node* res;
+	t_node* tmp;
+	t_node* res_head;
+	t_node* res_tmp;
+	t_node* tmpn;
 	unsigned	code;
 
-	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐÐ¾Ð¼ÐµÑ€ Ð¼ÐµÐ´ ÐºÐ°Ñ€Ñ‚Ñ‹";
+	std::cout << "\nÂâåäèòå Íîìåð ìåä êàðòû: ";
 	std::cin >> code;
-    node = head;
-    tmp = 0;
-    res = 0;
-    res_head = 0;
-    res_tmp = 0;
-    while (node)
-    {
-        if (node->code == code)
-        {
-            if (tmp)
-                tmp->next = node->next;
-            res = node;
-            res->next = 0;
-            if (!res_head)
-            {
-                res_head = res;
-                res_tmp = res_head;
-            }
-            else
-            {
-                while (res_tmp->next)
-                    res_tmp = res_tmp->next;
-                res_tmp->next = res;
-            }
-        }
-        tmp = node;
-        node = node->next;
-    }
-    return (res_head);
+	node = head;
+	tmp = 0;
+	res = 0;
+	res_head = 0;
+	tmpn = 0;
+	res_tmp = 0;
+	while (node)
+	{
+		if (node->id == code)
+		{
+			if (tmp)
+				tmp->next = node->next;
+			res = node;
+			tmpn = res->next;
+			res->next = 0;
+			if (!res_head)
+			{
+				res_head = res;
+				res_tmp = res_head;
+			}
+			else
+			{
+				while (res_tmp->next)
+					res_tmp = res_tmp->next;
+				res_tmp->next = res;
+			}
+		}
+		tmp = node;
+		node = node->id == code ? tmpn : node->next;
+	}
+	return (res_head);
 }
 
-void	 count_codes(t_node *head)
+void	 count_codes(t_node* head)
 {
-	t_node		*tmp;
+	t_node* tmp;
 	unsigned	counter;
 	unsigned	code;
 	std::string	data;
 
 	counter = 0;
-	std::cout << "\nÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð´ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ñ: "; std::cin >> code;
-	std::cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´Ð°Ñ‚Ñƒ: "; std::cin >> data;
+	std::cout << "\nÂâåäèòå êîä îáðàùåíèÿ: "; std::cin >> code;
+	std::cout << "Ââåäèòå äàòó: "; std::cin >> data;
 	tmp = head;
 	while (tmp)
 	{
@@ -118,5 +131,5 @@ void	 count_codes(t_node *head)
 			counter++;
 		tmp = tmp->next;
 	}
-	std::cout << "ÐšÐ¾Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð¾Ð±Ñ€Ð°Ñ‰ÐµÐ½Ð¸Ð¹: " << counter << std::endl;
+	std::cout << "Êîëè÷åñòâî îáðàùåíèé: " << counter << std::endl;
 }
