@@ -6,13 +6,12 @@ template<typename T>
 AStack<T>::AStack()
 {
 	elements = 0;
-	arr = (T*)malloc(sizeof(T) * elements);
+	arr = 0;
 }
 
 template<typename T>
 AStack<T>::~AStack()
 {
-	cout << "this is dest" << endl;
 }
 
 template<typename T>
@@ -25,7 +24,10 @@ template<typename T>
 void AStack<T>::push(T el)
 {
 	this->elements++;
-	this->arr = (T*)realloc(this->arr, sizeof(T) * this->elements);
+	if (elements == 1)
+		this->arr = (T*)malloc(sizeof(T));
+	else
+		this->arr = (T*)realloc(this->arr, sizeof(T) * this->elements);
 	this->arr[this->elements - 1] = el;
 }
 
@@ -39,7 +41,13 @@ template<typename T>
 void AStack<T>::pop()
 {
 	this->elements--;
-	this->arr = (T*)realloc(this->arr, sizeof(T) * (this->elements));
+	if (!elements)
+	{
+		free(this->arr);
+		this->arr = NULL;
+	}
+	else
+		this->arr = (T*)realloc(this->arr, sizeof(T) * (this->elements));
 }
 
 template<typename T>

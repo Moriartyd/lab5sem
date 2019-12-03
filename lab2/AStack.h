@@ -1,6 +1,4 @@
 #pragma once
-#ifndef ASTACK_H
-#define ASTACK_H
 
 using namespace std;
 
@@ -16,8 +14,6 @@ public:
 	void	pop();
 	T		poll();
 private:
-	T*	arr;
-	int	elements;
+	T*		arr;
+	int		elements;
 };
-
-#endif

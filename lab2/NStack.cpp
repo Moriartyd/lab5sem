@@ -1,17 +1,38 @@
 #include "NStack.h"
 
 template<typename T>
-inline Node<T>::Node()
+Node<T>::Node()
 {
 }
 
 template<typename T>
-inline Node<T>::~Node()
+Node<T>::~Node()
 {
 }
 
+template<typename T>
+void Node<T>::set_data(T d)
+{
+	data = d;
+}
 
+template<typename T>
+void Node<T>::set_next(Node<T>* n)
+{
+	next = n;
+}
 
+template<typename T>
+T Node<T>::get_data()
+{
+	return T(this->data);
+}
+
+template<typename T>
+Node<T>* Node<T>::get_next()
+{
+	return (next);
+}
 
 template<typename T>
 NStack<T>::NStack() :
@@ -22,6 +43,13 @@ NStack<T>::NStack() :
 template<typename T>
 NStack<T>::~NStack()
 {
+	Node<T>* tmp = node;
+	while (tmp)
+	{
+		node = tmp;
+		tmp = node->get_next();
+		delete node;
+	}
 }
 
 template<typename T>
@@ -33,10 +61,10 @@ bool NStack<T>::empty()
 template<typename T>
 void NStack<T>::push(T el)
 {
-	Node* new_node = new Node();
-	new_node = (Node*)malloc(sizeof(struct s_node));
-	new_node->data = el;
-	new_node->next = this->node;
+	Node<T>* new_node = new Node<T>();
+	new_node = (Node<T>*)malloc(sizeof(Node<T>));
+	new_node->set_data(el);
+	new_node->set_next(this->node);
 	this->node = new_node;
 	this->elements++;
 }
@@ -44,15 +72,15 @@ void NStack<T>::push(T el)
 template<typename T>
 T NStack<T>::top()
 {
-	return this->node->data;
+	return this->node->get_data();
 }
 
 template<typename T>
 void NStack<T>::pop()
 {
 	this->elements--;
-	struct s_node* tmp = this->node->next;
-	free(this->node);
+	Node<T>* tmp = this->node->get_next();
+	delete this->node;
 	this->node = tmp;
 }
 
