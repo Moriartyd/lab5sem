@@ -7,6 +7,10 @@
 #include <string>
 #include <stack>
 
+#define NUM 1
+#define OP 2
+#define ERROR "Ошибка в выражении"
+
 using namespace std;
 
 int is_num(char c)
@@ -17,6 +21,48 @@ int is_num(char c)
 int is_op(char c)
 {
 	return (c == '+' || c == '-' || c == '*' || c == '/' || c == '%');
+}
+
+int my_error()
+{
+	cout << ERROR << endl;
+	return (-1);
+}
+
+int	check_str(string str)
+{
+	int i;
+	int cur;
+	int prev;
+
+	i = 0;
+	cur = 0;
+	prev = 0;
+	while (str[i])
+	{
+		while (str[i] && str[i] == ' ')
+			i++;
+		if (str[i] && is_num(str[i]))
+		{
+			while (is_num(str[i]))
+				i++;
+			cur = NUM;
+			if (prev == cur)
+				return (my_error());
+			prev = cur;
+		}
+		else if (str[i] && is_op(str[i]))
+		{
+			cur = OP;
+			if (prev == cur)
+				return (my_error());
+			prev = cur;
+			i++;
+		}
+		else
+			return (my_error());
+	}
+	return (0);
 }
 
 int prior(char c)
@@ -131,8 +177,7 @@ int	calculate(string s, T *st)
 
 int main()
 {
-	setlocale(LC_ALL, "RUS");
-	int steck;
+	int menu;
 	AStack<char>* st1 = new AStack<char>();
 	NStack<char>* st2 = new NStack<char>();
 	stack<char>* st3 = new stack<char>;
@@ -140,13 +185,15 @@ int main()
 			\n1. На массиве\
 			\n2. На односвязном списке\
 			\n3. На встроенном контейнере" << endl;
-	cin >> steck;
+	cin >> menu;
 	string s;
 	cout << "Введите выражение: ";
 	getchar();
 	getline(cin, s);
+	if (check_str(s) == -1)
+		exit (0);
 	string out;
-	switch (steck)
+	switch (menu)
 	{
 	case (1):
 		out = opn(s, st1);
@@ -167,7 +214,7 @@ int main()
 	NStack<int>* st5 = new NStack<int>();
 	stack <int>* st6 = new stack<int>;
 	int res;
-	switch (steck)
+	switch (menu)
 	{
 	case (1):
 		res = calculate(out, st4);

@@ -1,4 +1,5 @@
 #include "NStack.h"
+#include <stdlib.h>
 
 template<typename T>
 Node<T>::Node()
@@ -36,7 +37,7 @@ Node<T>* Node<T>::get_next()
 
 template<typename T>
 NStack<T>::NStack() :
-	elements(0), node(0)
+	node(0), elements(0)
 {
 }
 

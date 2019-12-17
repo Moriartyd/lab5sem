@@ -1,6 +1,4 @@
-#pragma once
-
-#include <iostream>
+ï»¿#include <iostream>
 using namespace std;
 
 typedef struct		s_node
@@ -39,7 +37,7 @@ t_node* creatennode(void)
 	size_t		n;
 	int			info;
 
-	std::cout << "Ñêîëüêî ýëåìåíòîâ íóæíî ñîçäàòü: ";
+	std::cout << "Ð¡ÐºÐ¾Ð»ÑŒÐºÐ¾ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð² Ð½ÑƒÐ¶Ð½Ð¾ ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ: ";
 	std::cin >> n;
 	i = 0;
 	head = NULL;
@@ -49,16 +47,16 @@ t_node* creatennode(void)
 		if (!head)
 		{
 			head = node_init();
-			std::cout << "Äëÿ " << i << " ýëåìåíòà:\n";
-			std::cout << "\tÂâåäèòå èíôîðìàöèþ: ";
+			std::cout << "Ð”Ð»Ñ " << i << " ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:\n";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ: ";
 			std::cin >> info;
 			head->info = info;
 			tmp = head;
 		}
 		else
 		{
-			std::cout << "Äëÿ " << i << " ýëåìåíòà:\n";
-			std::cout << "\tÂâåäèòå èíôîðìàöèþ: ";
+			std::cout << "Ð”Ð»Ñ " << i << " ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð°:\n";
+			std::cout << "\tÐ’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸ÑŽ: ";
 			std::cin >> info;
 			tmp->next = add_new(info);
 			tmp = tmp->next;
@@ -73,7 +71,7 @@ void	print_node(t_node* head)
 
 	tmp = head;
 	if (!head)
-		cout << "Íåò ýëåìåíòîâ" << endl;
+		cout << "ÐÐµÑ‚ ÑÐ»ÐµÐ¼ÐµÐ½Ñ‚Ð¾Ð²" << endl;
 	while (tmp)
 	{
 		cout << tmp->info;

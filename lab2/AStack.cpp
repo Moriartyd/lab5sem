@@ -1,5 +1,4 @@
 #include "AStack.h"
-#include <malloc.h>
 #include <iostream>
 
 template<typename T>

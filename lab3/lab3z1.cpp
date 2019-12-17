@@ -1,6 +1,6 @@
 ﻿#include <iostream>
 #include <string>
-#include <malloc.h>
+#include <stdlib.h>
 #include "node.h"
 
 using namespace std;
@@ -37,7 +37,7 @@ int main()
 	setlocale(LC_ALL, "RUS");
 	cout << "=============Демонстрация первого задания============" << endl;
 	string s;
-	cout << "Введите какую-либо строку: ";
+	cout << "Введите какую-либо строку, я проверю, является ли она палиндромом: ";
 	cin >> s;
 	int res = is_pal(s, 0, s.length() - 1);
 	if (res)
@@ -53,5 +53,6 @@ int main()
 	cout << "Введите информацию, по которой нужно удалить элементы: "; cin >> info;
 	head = del_nodes(head, NULL, info);
 	print_node(head);
+	cout << "=======================Конец=======================\n" << endl;
 	return (0);
 }
