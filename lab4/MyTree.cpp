@@ -1,4 +1,4 @@
-#include "MyTree.h"
+ï»¿#include "MyTree.h"
 
 using namespace std;
 
@@ -12,7 +12,7 @@ MyTree::MyTree(int nodes)
 	while (i)
 	{
 		tmp = tree;
-		cout << "Ââåäèòå " << nodes - i + 1 << "îå çíà÷åíèå: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ " << nodes - i + 1 << "Ð¾Ðµ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ: ";
 		getline(cin, value);
 		if (i == nodes)
 			tree->data = value;
@@ -20,7 +20,7 @@ MyTree::MyTree(int nodes)
 			tree = insert(value);
 		if (tree != tmp)
 		{
-			cout << "Ïðè çàäàííûõ çíà÷åíèÿõ ñîçäàòü äåðåâî íåâîçìîæíî!" << endl;
+			cout << "ÐŸÑ€Ð¸ Ð·Ð°Ð´Ð°Ð½Ð½Ñ‹Ñ… Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸ÑÑ… ÑÐ¾Ð·Ð´Ð°Ñ‚ÑŒ Ð´ÐµÑ€ÐµÐ²Ð¾ Ð½ÐµÐ²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾!" << endl;
 			exit(0);
 		}
 		i--;
