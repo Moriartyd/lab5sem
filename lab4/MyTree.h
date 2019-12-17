@@ -6,7 +6,7 @@
 #include <iostream>
 using namespace std;
 
-#define B 12
+#define B 2
 
 class MyTree
 {
@@ -18,7 +18,7 @@ public:
 	~MyTree();
 	int find_tree(string value);
 	int	get_leaves();
-	int get_height();
+	//int get_height();
 	int rh();
 	int get_bfactor();
 	void fix_height();

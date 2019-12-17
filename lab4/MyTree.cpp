@@ -25,7 +25,6 @@ MyTree::MyTree(int nodes)
 		}
 		i--;
 	}
-	height = get_height();
 }
 
 MyTree::MyTree(const MyTree& tree) :
@@ -49,19 +48,19 @@ MyTree::~MyTree()
 
 int MyTree::find_tree(string value)
 {
-	MyTree tree;
+	MyTree *tree;
 	int i = 0;
-	tree = *this;
-	while (&tree)
+	tree = this;
+	while (tree)
 	{
-		if (value < tree.data)
+		if (value < tree->data)
 		{
-			tree = *(tree.l);
+			tree = tree->l;
 			i++;
 		}
-		else if (value > tree.data)
+		else if (value > tree->data)
 		{
-			tree = *(tree.r);
+			tree = tree->r;
 			i++;
 		}
 		else
@@ -77,7 +76,7 @@ int MyTree::get_leaves()
 	if (!&top)
 		return (0);
 	queue <MyTree*> q;
-	do
+	while (1)
 	{
 		if (!top.l && !top.r)
 			i++;
@@ -89,23 +88,12 @@ int MyTree::get_leaves()
 		{
 			top = *(q.front());
 			q.pop();
+			continue;
 		}
-	} while (!q.empty());
+		if (q.empty())
+			break;
+	}
 	return (i);
-}
-
-int MyTree::get_height()
-{
-	MyTree tree = *this;
-	int h1 = 0;
-	int h2 = 0;
-	if (!&tree)
-		return (0);
-	if (tree.l)
-		h1 = tree.l->get_leaves();
-	if (tree.r)
-		h2 = tree.r->get_leaves();
-	return (h1 > h2 ? h1 + 1 : h2 + 1);
 }
 
 int MyTree::rh()
@@ -127,11 +115,16 @@ void MyTree::show(int lvl)
 {
 	if (this)
 	{
-		r->show(lvl + 1);
 		for (int i = 0; i < lvl; i++)
 			cout << "\t";
 		cout << data << endl;
-		l->show(lvl + 1);
+		this->l->show(lvl - 1);
+		r->show(lvl + 1);
+		//r->show(lvl + 1);
+		//for (int i = 0; i < lvl; i++)
+		//	cout << "\t";
+		//cout << data << endl;
+		//l->show(lvl + 1);
 	}
 }
 
