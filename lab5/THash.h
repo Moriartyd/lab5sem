@@ -1,14 +1,13 @@
 #pragma once
 #include <string>
 #include <iostream>
-#define DELIMITER 10
 
 using namespace std;
 
 int	ft_atoi(char c)
 {
 	if (c >= '0' && c <= '9')
-		return (c);
+		return (c - '0');
 	return (0);
 }
 
@@ -37,10 +36,10 @@ class THash
 			hash += ft_atoi(key[i]);
 			i++;
 		}
-		hash = hash % DELIMITER;
+		hash = hash % cnt;
 		return (hash);
 	}
-	int cnt = 10;
+	int cnt = 3;
 	int size = 0;
 	Owner<TValue1, TValue2, TKey>** table;
 public:
