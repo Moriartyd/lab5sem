@@ -49,6 +49,7 @@ public:
 	void find(TKey key);
 	void del(TKey key);
 	void show_ind();
+	void reHash();
 	~THash();
 };
 
@@ -68,6 +69,9 @@ inline THash<TValue1, TValue2, TKey>::THash()
 template<typename TValue1, typename TValue2, typename TKey>
 inline void THash<TValue1, TValue2, TKey>::push(TValue1 n, TValue2 m, TKey nu)
 {
+	if (size && double(size) / cnt > 0.75)
+		this->reHash();
+
 	int index = HashFunc(nu);
 	Owner<TValue1, TValue2, TKey>* el = new Owner<TValue1, TValue2, TKey>(n, m, nu);
 	size++;
@@ -203,6 +207,41 @@ inline void THash<TValue1, TValue2, TKey>::show_ind()
 		i++;
 	}
 	cout << endl;
+}
+
+template<typename TValue1, typename TValue2, typename TKey>
+inline void THash<TValue1, TValue2, TKey>::reHash()
+{
+	Owner<TValue1, TValue2, TKey>** new_table;
+	Owner<TValue1, TValue2, TKey>* new_element;
+	Owner<TValue1, TValue2, TKey>* tmp;
+	int index;
+
+	new_table = new Owner<TValue1, TValue2, TKey> * [cnt];
+	for (int i = 0; i < cnt; i++)
+		new_table[i] = 0;
+	cnt *= 2;
+	for (int i = 0; i < cnt / 2; i++)
+	{
+		while (table[i])
+		{
+			index = HashFunc(table[i]->num);
+			new_element = new Owner<TValue1, TValue2, TKey>(table[i]->name, table[i]->model);
+			if (!new_table[index])
+			{
+				new_table[index] = new_element;
+				new_element->next = 0;
+			}
+			else
+			{
+				tmp = new_table[index];
+				while (tmp->next)
+					tmp = tmp->next;
+				tmp->next = new_element;
+			}
+			table[i] = table[i]->next;
+		}
+	}
 }
 
 template<typename TValue1, typename TValue2, typename TKey>
