@@ -1,5 +1,4 @@
-#pragma once
-#include <string>
+ï»¿#include <string>
 #include <iostream>
 
 using namespace std;
@@ -89,30 +88,28 @@ inline void THash<TValue1, TValue2, TKey>::push(TValue1 n, TValue2 m, TKey nu)
 }
 
 template<typename TValue1, typename TValue2, typename TKey>
-inline void THash<TValue1, TValue2, TKey>::show()
+void THash<TValue1, TValue2, TKey>::show()
 {
 	Owner<TValue1, TValue2, TKey>* tmp;
-	int i = 0;
 	int j;
-	while (i < cnt)
+	for (int i = 0; i<cnt;i++)
 	{
 		if (table[i])
 		{
 			j = 0;
-			cout << "Ýëåìåíò ¹" << i << ":" << endl;
+			cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ â„–" << i << ":" << endl;
 			tmp = table[i];
 			while (tmp)
 			{
 				if (j > 0)
-					cout << "Ýëåìåíò ¹" << i <<"/" << j << ":" << endl;
-				cout << "\tÈìÿ: " << tmp->name << endl;
-				cout << "\tÌàðêà: " << tmp->model << endl;
-				cout << "\tÍîìåð: " << tmp->num << endl;
+					cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ â„–" << i <<"/" << j << ":" << endl;
+				cout << "\tÐ˜Ð¼Ñ: " << tmp->name << endl;
+				cout << "\tÐœÐ°Ñ€ÐºÐ°: " << tmp->model << endl;
+				cout << "\tÐÐ¾Ð¼ÐµÑ€: " << tmp->num << endl;
 				tmp = tmp->next;
 				j++;
 			}
 		}
-		i++;
 	}
 }
 
@@ -125,20 +122,20 @@ inline void THash<TValue1, TValue2, TKey>::find(TKey key)
 	index = HashFunc(key);
 	tmp = table[index];
 	if (!tmp)
-		cout << "Ýëåìåíò íå íàéäåí :(" << endl;
+		cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½ :(" << endl;
 	else
 	{
 		while (tmp && tmp->num != key)
 			tmp = tmp->next;
 		if (tmp)
 		{
-			cout << "Âëàäåëåö àâòîìîáèëÿ:" << endl;
-			cout << "\tÈìÿ: " << tmp->name << endl;
-			cout << "\tÌàðêà: " << tmp->model << endl;
-			cout << "\tÍîìåð: " << tmp->num << endl;
+			cout << "Ð’Ð»Ð°Ð´ÐµÐ»ÐµÑ† Ð°Ð²Ñ‚Ð¾Ð¼Ð¾Ð±Ð¸Ð»Ñ:" << endl;
+			cout << "\tÐ˜Ð¼Ñ: " << tmp->name << endl;
+			cout << "\tÐœÐ°Ñ€ÐºÐ°: " << tmp->model << endl;
+			cout << "\tÐÐ¾Ð¼ÐµÑ€: " << tmp->num << endl;
 		}
 		else
-			cout << "Ýëåìåíò íå íàéäåí :(" << endl;
+			cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½ :(" << endl;
 	}
 }
 
@@ -177,7 +174,7 @@ inline void THash<TValue1, TValue2, TKey>::del(TKey key)
 		delete tmp;
 	}
 	else
-		cout << "Ýëåìåíò íå íàéäåí :(" << endl;
+		cout << "Ð­Ð»ÐµÐ¼ÐµÐ½Ñ‚ Ð½Ðµ Ð½Ð°Ð¹Ð´ÐµÐ½ :(" << endl;
 	tmp = 0;
 }
 
@@ -210,38 +207,50 @@ inline void THash<TValue1, TValue2, TKey>::show_ind()
 }
 
 template<typename TValue1, typename TValue2, typename TKey>
-inline void THash<TValue1, TValue2, TKey>::reHash()
+void THash<TValue1, TValue2, TKey>::reHash()
 {
 	Owner<TValue1, TValue2, TKey>** new_table;
-	Owner<TValue1, TValue2, TKey>* new_element;
 	Owner<TValue1, TValue2, TKey>* tmp;
+	TKey	code;
+	TValue1 name;
+	TValue2 model;
 	int index;
 
-	new_table = new Owner<TValue1, TValue2, TKey> * [cnt];
-	for (int i = 0; i < cnt; i++)
+	new_table = new Owner<TValue1, TValue2, TKey> * [cnt*2];
+	for (int i = 0; i < cnt*2; i++)
 		new_table[i] = 0;
 	cnt *= 2;
 	for (int i = 0; i < cnt / 2; i++)
 	{
 		while (table[i])
 		{
-			index = HashFunc(table[i]->num);
-			new_element = new Owner<TValue1, TValue2, TKey>(table[i]->name, table[i]->model);
-			if (!new_table[index])
+			name = table[i]->name;
+			model = table[i]->model;
+			code = table[i]->num;
+			index = HashFunc(code);
+			Owner<TValue1, TValue2, TKey>* new_element = new Owner<TValue1, TValue2, TKey>(name, model, code, 0);
+			Owner<TValue1, TValue2, TKey>* place = new_table[index];
+			if (!place)
 			{
 				new_table[index] = new_element;
 				new_element->next = 0;
+				size++;
 			}
 			else
 			{
-				tmp = new_table[index];
-				while (tmp->next)
-					tmp = tmp->next;
-				tmp->next = new_element;
+				while (place->next)
+					place = place->next;
+				place->next = new_element;
 			}
 			table[i] = table[i]->next;
 		}
 	}
+	Owner<TValue1, TValue2, TKey> **temp = 0;
+	temp = table;
+	table = new_table;
+	for (int i = 0; i < cnt/2; i++)
+		delete[] temp[i];
+	delete[] temp;
 }
 
 template<typename TValue1, typename TValue2, typename TKey>
