@@ -1,5 +1,3 @@
-#pragma once
-
 class Btree
 {
 public:
@@ -20,6 +18,3 @@ Btree::Btree() :
 Btree::~Btree()
 {
 }
-
-
-

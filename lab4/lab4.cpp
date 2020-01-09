@@ -1,6 +1,8 @@
 ﻿#include <iostream>
 #include "MyTree.h"
 
+using namespace std;
+
 void    show_menu()
 {
     std::cout << "====================================МЕНЮ====================================" << endl;
@@ -15,15 +17,6 @@ void    show_menu()
     std::cout << "Ваш выбор: ";
 }
 
-MyTree* create()
-{
-    int n;
-    cout << "Сколько узлов вы хотите создать: "; cin >> n;
-    MyTree* res = new MyTree(n);
-    cout << "Узел создан" << endl;
-    return (res);
-}
-
 MyTree* add(MyTree *&tree)
 {
     string value;
@@ -33,6 +26,34 @@ MyTree* add(MyTree *&tree)
     tree = tree->insert(value);
     cout << "Элемент добавлен" << endl;
     return (tree);
+}
+
+MyTree* add_what(MyTree *&tree)
+{
+    string value;
+    cout << "Введите значение, которое хотите добавить: ";
+    getline(cin, value);
+    tree = tree->insert(value);
+    cout << "Элемент добавлен" << endl;
+    return (tree);
+}
+
+MyTree* create()
+{
+    int n;
+    int what = 1;
+    cout << "Сколько узлов вы хотите создать: "; cin >> n;
+    MyTree* res = 0;
+    if (n <= 3)
+        res =  new MyTree(n);
+    else
+    {
+        res = new MyTree(n%3);
+        for (int i = n%3; i < n;i++)
+            res = add_what(res);
+    }
+    cout << "Узел создан" << endl;
+    return (res);
 }
 
 void get_long(MyTree tree)

@@ -38,7 +38,7 @@ MyTree::MyTree(string value) :
 }
 
 MyTree::MyTree() :
-	l(0), r(0), data(0), height(0)
+	l(0), r(0), data(nullptr), height(0)
 {
 }
 

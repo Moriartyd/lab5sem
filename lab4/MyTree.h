@@ -1,4 +1,3 @@
-#pragma once
 #ifndef MYTREE_H
 #define MYTREE_H
 #include <string>
@@ -18,7 +17,6 @@ public:
 	~MyTree();
 	int find_tree(string value);
 	int	get_leaves();
-	//int get_height();
 	int rh();
 	int get_bfactor();
 	void fix_height();
