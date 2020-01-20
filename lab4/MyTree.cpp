@@ -39,9 +39,9 @@ MyTree::MyTree(string value) :
 
 MyTree::MyTree()
 {
-	this->l = 0;
-	this->r = 0;
-	this->data = nullptr;
+	this->l = nullptr;
+	this->r = nullptr;
+	this->data = "";
 	this->height = 0;
 }
 
@@ -56,12 +56,12 @@ int MyTree::find_tree(string value)
 	tree = this;
 	while (tree)
 	{
-		if (value < tree->data)
+		if (tree->l && value < tree->data)
 		{
 			tree = tree->l;
 			i++;
 		}
-		else if (value > tree->data)
+		else if (tree->r && value > tree->data)
 		{
 			tree = tree->r;
 			i++;
@@ -104,6 +104,19 @@ int MyTree::rh()
 	return this ? height : 0;
 }
 
+int MyTree::take_h()
+{
+	MyTree *tmpl = l;
+	MyTree *tmpr = r;
+	int hl = 0;
+	int hr = 0;
+	if (tmpl)
+		hl = tmpl->rh();
+	if (tmpr)
+		hr = tmpr->rh();
+	return (hl > hr ? hl + 1 : hr + 1);
+}
+
 int MyTree::get_bfactor()
 {
 	return (r->rh() - l->rh());
@@ -119,7 +132,7 @@ void MyTree::show(int lvl)
 	if (this)
 	{
 		for (int i = 0; i < lvl; i++)
-			cout << "\t";
+			cout << "  ";
 		cout << data << endl;
 		this->l->show(lvl - 1);
 		r->show(lvl + 1);

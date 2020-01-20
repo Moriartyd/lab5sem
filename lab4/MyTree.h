@@ -18,6 +18,7 @@ public:
 	int find_tree(string value);
 	int	get_leaves();
 	int rh();
+	int take_h();
 	int get_bfactor();
 	void fix_height();
 	void show(int lvl);

@@ -42,8 +42,11 @@ MyTree* create()
 {
     int n;
     cout << "Сколько узлов вы хотите создать: "; cin >> n;
-    MyTree* res = new MyTree();
-    for (int i = 0; i < n;i++)
+    getchar();
+    string str;
+    cout << "Введите значение, которое хотите добавить: "; cin >> str; getchar();
+    MyTree* res = new MyTree(str);
+    for (int i = 1; i < n;i++)
         res = add_what(res);
     cout << "Узел создан" << endl;
     return (res);
