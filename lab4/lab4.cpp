@@ -41,17 +41,10 @@ MyTree* add_what(MyTree *&tree)
 MyTree* create()
 {
     int n;
-    int what = 1;
     cout << "Сколько узлов вы хотите создать: "; cin >> n;
-    MyTree* res = 0;
-    if (n <= 3)
-        res =  new MyTree(n);
-    else
-    {
-        res = new MyTree(n%3);
-        for (int i = n%3; i < n;i++)
-            res = add_what(res);
-    }
+    MyTree* res = new MyTree();
+    for (int i = 0; i < n;i++)
+        res = add_what(res);
     cout << "Узел создан" << endl;
     return (res);
 }

@@ -37,9 +37,12 @@ MyTree::MyTree(string value) :
 {
 }
 
-MyTree::MyTree() :
-	l(0), r(0), data(nullptr), height(0)
+MyTree::MyTree()
 {
+	this->l = 0;
+	this->r = 0;
+	this->data = nullptr;
+	this->height = 0;
 }
 
 MyTree::~MyTree()
